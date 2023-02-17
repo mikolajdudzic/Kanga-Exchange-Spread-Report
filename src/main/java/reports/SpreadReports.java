@@ -1,6 +1,5 @@
 package reports;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -13,6 +12,8 @@ import java.util.Map;
 import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 public class SpreadReports {
     public static void main(String[] args) {
@@ -78,8 +79,9 @@ public class SpreadReports {
             // Tworzenie i zapisywanie pliku z zestawieniem speadów
             try {
                 String fileName = String.format(reportFile, dateFormatter.format(date));
-                FileWriter fileWriter = new FileWriter(fileName);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
+                FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
+
                 printWriter.println("Spread <= 2%");
                 printWriter.println("Nazwa rynku\tSpread[%]");
 
